@@ -8,12 +8,7 @@ import HomePage from './pages/HomePage';
 function App() {
   return (
     <div>
-      <Routes>
-        <Route path='/' element={<HomePage />}/>
-        <Route path='signin' element={<SignIn />}/>
-        <Route path='signup' element={<SignUp />}/>
-      </Routes>
-
+eee
     </div>
   );
 }
