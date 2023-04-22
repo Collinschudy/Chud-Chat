@@ -5,7 +5,7 @@ const Button = ({children, signup}) => {
         signup: ` mt-[1em] py-2 rounded bg-sky-900 text-white `
     }
     return (
-        <button className={`${signup ? style.signup: ''}`}>{children}</button>
+        <button className={`${signup ? style.signup: ''}`}> {children}</button>
     )
 }
 

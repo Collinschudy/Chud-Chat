@@ -1,5 +1,5 @@
-import Button from "../components/button";
-import { useState, useEffect } from "react";
+import Button from "../components/button.component";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from "../firebase/firebase.utils";
@@ -43,7 +43,7 @@ const SignIn = () => {
         catch (error) {
             const errCode = error.code;
             const errMessage = error.message;
-            alert(errMessage)
+            alert(errCode, errMessage)
         }
 
     }

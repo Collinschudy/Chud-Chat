@@ -1,7 +1,6 @@
-import FormInput from "../Input";
 import { useState, useEffect } from "react";
 import avi from '../assets/image.png';
-import Button from "../components/button";
+import Button from "../components/button.component";
 import { useNavigate } from "react-router-dom";
 import { auth, storage, db } from "../firebase/firebase.utils";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
@@ -99,7 +98,7 @@ const SignUp = () => {
             const errorCode = error.code;
             const errorMessage = error.message;
 
-            alert(errorMessage)
+            alert(errorCode, errorMessage)
 
 
         };
