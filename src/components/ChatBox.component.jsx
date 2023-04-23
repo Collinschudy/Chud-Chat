@@ -1,12 +1,18 @@
-import React from 'react';
+import ChatContent from './ChatContent.component';
+import TopChatBar from './TopChatBar.component';
+import MessageInput from './MessageInput.component';
 
 const ChatBox = () => {
 
   const styles = {
-    container: `w-[65%] bg-white`
+    container: `w-[100%] flex-[0_0_auto] bg-white sm:w-[65%]`
   }
   return (
-    <div className={styles.container}>ChatBox</div>
+    <div className={styles.container}>
+      <TopChatBar />
+      <ChatContent />
+      <MessageInput />
+    </div>
   )
 }
 

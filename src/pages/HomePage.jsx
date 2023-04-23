@@ -3,8 +3,8 @@ import Sidebar from '../components/Sidebar.component';
 
 const HomePage = () => {
     const styles = {
-        pageWrapper: `h-[100vh] w-[100%] flex items-center justify-center sm:w-[100%] sm:border sm:border-[10px] sm:border-sky-900 bg-gray-200`,
-        contentsContainer: `sm:border sm:border-none sm:h-[40em] sm:w-[80em] sm:rounded-xl overflow-hidden border border-red-500 h-[20em] w-[60rem] flex`
+        pageWrapper: ` sm:w-[100%] h-[100%] w-[100%] overflow-y-hidden box-border flex items-center justify-center sm:h-[100vh] sm:border sm:border-[10px] sm:border-sky-900 bg-gray-200 overflow-x-scroll`,
+        contentsContainer: `sm:shadow-xl sm:border sm:border-none sm:h-[40em] sm:w-[80em] sm:rounded-xl h-[100vh] w-[100%] flex`
     }
     return (
         <div className={styles.pageWrapper}>

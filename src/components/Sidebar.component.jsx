@@ -1,18 +1,19 @@
-import React from 'react';
 import Title from './Title.component';
 import Navbar from '../components/Navbar.component';
 import Search from './Search.component';
+import CurrentChats from './CurrentChats.component';
 
 const Sidebar = () => {
 
   const styles = {
-    container: `w-[35%] border-r border-black bg-sky-700 text-white`
+    container: `w-[100%] flex-[0_0_auto] bg-sky-700 text-white sm:w-[35%]`
   }
   return (
     <div className={styles.container}>
       <Title />
       <Navbar />
       <Search />
+      <CurrentChats />
       </div>
   )
 }

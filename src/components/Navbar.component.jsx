@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import image from '../assets/avatar.jpg';
@@ -8,10 +7,10 @@ import { toggleProfileView } from '../redux/profile-view/profileview.action';
 const Navbar = ({ hidden, toggleProfileView }) => {
 
   const styles = {
-    container: `border border-red-800 w-[90%] flex items-center justify-between m-auto`,
-    avatar: `w-[4em] h-[4em] rounded-[50%]`,
-    username: `flex items-center text-[1.5em] border border-red-800 min-w-[30%] justify-between relative`,
-    logout: `bg-white text-black h-[4em] absolute flex flex-col text-[0.8em] p-[0.5em] rounded top-[2em] right-[0]`,
+    container: `w-[90%] flex items-center justify-between m-auto mt-[1em] bg-sky-900 rounded-tl-[2em] rounded-bl-[2em] rounded-tr rounded-br relative`,
+    avatar: `w-[3em] h-[3em] rounded-full object-cover`,
+    username: `flex items-center text-[1.5em] min-w-[30%] justify-between relative`,
+    logout: `bg-white text-black h-[4em] absolute flex flex-col text-[0.7em] p-[0.5em] rounded top-[2em] right-[0] z-40`,
     hide: `hidden`
   }
   return (

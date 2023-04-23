@@ -1,11 +1,11 @@
-import React from 'react'
+import { BsChatHeart } from 'react-icons/bs'
 
 const Title = () => {
     const styles = {
-        title: `pl-[1em] pt-[1em] text-sky-950 font-bold`
+        title: `pl-[2em] pt-[1em] text-sky-950 font-[700] font-['Charmonman'] flex items-center`
     }
   return (
-    <div className={styles.title}>Chud-Chat</div>
+    <div className={styles.title}><BsChatHeart className='mr-[0.5em] fill-red-500'/> Chud Chat </div>
   )
 }
 

@@ -5,8 +5,11 @@ import HomePage from './pages/HomePage';
 
 
 function App() {
+  const styles = {
+    container: ``
+  }
   return (
-    <div>
+    <div className={styles.container}>
       <Routes>
         <Route path='signin' element={<SignIn />}/>
         <Route path='signup' element={<SignUp />}/>

@@ -1,4 +1,3 @@
-import React from 'react'
 import ProfileActionTypes from './profileview.action.types';
 
 const INITIAL_STATE = {
