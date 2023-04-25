@@ -1,10 +1,11 @@
 import { connect } from 'react-redux';
-
+import { signOut } from 'firebase/auth'
+import { auth } from '../firebase/firebase.utils'
 import image from '../assets/avatar.jpg';
 import { HiDotsVertical } from 'react-icons/hi'
 import { toggleProfileView } from '../redux/profile-view/profileview.action';
 
-const Navbar = ({ hidden, toggleProfileView }) => {
+const Navbar = ({ hidden, toggleProfileView, currentUser }) => {
 
   const styles = {
     container: `w-[90%] flex items-center justify-between m-auto mt-[1em] bg-sky-900 rounded-tl-[2em] rounded-bl-[2em] rounded-tr rounded-br relative`,
@@ -16,14 +17,14 @@ const Navbar = ({ hidden, toggleProfileView }) => {
   return (
     <div className={styles.container}>
       <div className={styles.imageContainer}>
-        <img className={styles.avatar} src={image} alt="" />
+        <img className={styles.avatar} src={currentUser.photoURL} alt="avatar of user" />
       </div>
       <div className={styles.username}>
-        Collins <span><HiDotsVertical onClick={() => toggleProfileView()} /></span>
+        {currentUser.displayName} <span><HiDotsVertical onClick={() => toggleProfileView()} /></span>
           {!hidden ? 
           (<div className={styles.logout}>
             <span>Profile</span>
-            <span>sign out</span>
+            <span onClick={() => signOut(auth)}>sign out</span>
           </div>)
           :
           ''
@@ -35,8 +36,9 @@ const Navbar = ({ hidden, toggleProfileView }) => {
 }
 
 
-const mapStateToProps = ({ profile }) => ({
-  hidden: profile.hidden
+const mapStateToProps = ({ profile, user }) => ({
+  hidden: profile.hidden,
+  currentUser: user.currentUser
 })
 const mapDispatchToProps = dispatch => ({
   toggleProfileView: () => dispatch(toggleProfileView())

@@ -77,11 +77,11 @@ const SignUp = () => {
                         await setDoc(doc(db, 'chudChatUsers', user.uid), {
                             uid: user.uid,
                             email,
-                            displayName: displayName,
+                            chudChatHandle: displayName.toLowerCase(),
                             photoURL: URL,
                             createdAt: createdAt
                         })
-                        await setDoc(doc(db, 'userChats', user.id), {})
+                        await setDoc(doc(db, 'userChats', user.uid), {})
                     });
                 });
             setEmail('');
