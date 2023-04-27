@@ -51,11 +51,11 @@ const SignUp = () => {
 
         if (password.length <= 4) {
             setErr(true);
-            return
+            return;
         }
         else if (password !== confirmPassword) {
             setErr1(true)
-            return
+            return;
         }
 
         try {
@@ -161,7 +161,7 @@ const SignUp = () => {
                     <Button signup>Sign Up</Button>
                 </form>
                 <div>
-                    Do you have an account? <span className={style.spansignin} onClick={() => navigate('/signin')}>Sign In</span> here.
+                    Do you have an account? <span className={style.spansignin} onClick={() => navigate('/signin')}> Sign In </span> here.
                 </div>
             </div>
         </div>

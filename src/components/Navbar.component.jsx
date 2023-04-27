@@ -1,9 +1,12 @@
 import { connect } from 'react-redux';
 import { signOut } from 'firebase/auth'
 import { auth } from '../firebase/firebase.utils'
-import image from '../assets/avatar.jpg';
+
 import { HiDotsVertical } from 'react-icons/hi'
 import { toggleProfileView } from '../redux/profile-view/profileview.action';
+import { createStructuredSelector } from 'reselect';
+import { selectCurrentUser } from '../redux/user/userSelector';
+import { selectProfileView } from '../redux/profile-view/profileview.selector';
 
 const Navbar = ({ hidden, toggleProfileView, currentUser }) => {
 
@@ -36,9 +39,9 @@ const Navbar = ({ hidden, toggleProfileView, currentUser }) => {
 }
 
 
-const mapStateToProps = ({ profile, user }) => ({
-  hidden: profile.hidden,
-  currentUser: user.currentUser
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  hidden: selectProfileView
 })
 const mapDispatchToProps = dispatch => ({
   toggleProfileView: () => dispatch(toggleProfileView())

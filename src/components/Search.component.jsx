@@ -22,7 +22,7 @@ const Search = ({currentUser}) => {
         console.log(foundUser)
       });
     } catch(err){
-      alert(err.message)
+      console(err.code, err.message)
     }
    
     
@@ -36,43 +36,42 @@ const Search = ({currentUser}) => {
   }
 
   const handleSelect = async () => {
-    const comnbinedId = currentUser.uid + foundUser.uid;
+    const combinedId = currentUser.uid + foundUser.uid;
     try {
-      const chatRef = await getDoc(doc(db, 'chats', comnbinedId))
+      const chatRef = await getDoc(doc(db, 'chats', combinedId))
 
       if (!chatRef.exists()){
-        await setDoc(doc(db, 'chats', comnbinedId), {messages: []});
+        await setDoc(doc(db, 'chats', combinedId), {messages: []});
 
         await updateDoc(doc(db, 'userChats', currentUser.uid), {
-          [comnbinedId+'.userDetails']: {
+          [combinedId+'.userDetails']: {
             uid: foundUser.uid,
             chudChatHandle: foundUser.chudChatHandle,
-            photoURL: foundUser.photoURL
+            photoURL: foundUser.photoURL,
+            combinedId,
           },
-          [comnbinedId+'.date']: serverTimestamp()
+          [combinedId+'.date']: serverTimestamp(),
         })
 
         await updateDoc(doc(db, 'userChats', foundUser.uid), {
-          [comnbinedId+'.userDetails']: {
+          [combinedId+'.userDetails']: {
             uid: currentUser.uid,
             chudChatHandle: currentUser.chudChatHandle,
-            photoURL: currentUser.photoURL
+            photoURL: currentUser.photoURL,
+            combinedId,
           },
-          [comnbinedId+'.date']: serverTimestamp()
+          [combinedId+'.date']: serverTimestamp(),
         })
       }
     } 
     catch (error) {
-      alert(error.message)
+      console.log(error.code, error.message)
     }
     setFoundUser(null)
     setSearchUser('')
-  }
+  };
 
   
-
-
-
   const styles = {
     container: `w-[90%] m-auto flex flex-col justfy-around mt-[1em] mb-[0.5em]`,
     inputform: `w-[100%] relative z-100`,
@@ -94,14 +93,18 @@ const Search = ({currentUser}) => {
           value={searchUser}
           />
         </div>
-       { foundUser && <div className={styles.founduser} onClick={handleSelect}>
+       { foundUser ? <div className={styles.founduser} onClick={handleSelect}>
           <div className={styles.imagecontainer}>
             <img className={styles.userimage} src={foundUser.photoURL} alt="avatar" />
           </div>
           <div className={styles.foundusername}>
             <span>{foundUser.chudChatHandle}</span>
           </div>
-        </div>}
+        </div>
+        : searchUser.trim() === '' ?
+        ''
+      :
+      <div>user not found</div>}
       </div>
       <hr className='mb-[1em] bg-sky-900 border-none h-[1px]' />
     </>
