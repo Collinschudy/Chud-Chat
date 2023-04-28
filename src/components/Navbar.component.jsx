@@ -7,8 +7,10 @@ import { toggleProfileView } from '../redux/profile-view/profileview.action';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../redux/user/userSelector';
 import { selectProfileView } from '../redux/profile-view/profileview.selector';
+import { useState } from 'react';
 
 const Navbar = ({ hidden, toggleProfileView, currentUser }) => {
+  const [show, setShow] = useState(false)
 
   const styles = {
     container: `w-[90%] flex items-center justify-between m-auto mt-[1em] bg-sky-900 rounded-tl-[2em] rounded-bl-[2em] rounded-tr rounded-br relative`,
@@ -23,8 +25,8 @@ const Navbar = ({ hidden, toggleProfileView, currentUser }) => {
         <img className={styles.avatar} src={currentUser.photoURL} alt="avatar of user" />
       </div>
       <div className={styles.username}>
-        {currentUser.displayName} <span><HiDotsVertical onClick={() => toggleProfileView()} /></span>
-          {!hidden ? 
+        {currentUser.displayName} <span><HiDotsVertical onClick={() => {setShow(!show)}} /></span>
+          {show ? 
           (<div className={styles.logout}>
             <span>Profile</span>
             <span onClick={() => signOut(auth)}>sign out</span>

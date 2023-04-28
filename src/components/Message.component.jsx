@@ -1,19 +1,18 @@
 import { createStructuredSelector } from 'reselect';
-import imagee from '../assets/currentchat.jpg';
 import { selectCurrentUser } from '../redux/user/userSelector';
 import { selectFriendChat } from '../redux/chats/chat.selectors';
 import { connect } from 'react-redux';
 import { useRef } from 'react';
 import { useEffect } from 'react';
 const Message = ({message, currentUser, friend}) => {
+    const {text, senderId, time, photo} = message
     const ref = useRef();
 
     useEffect(() => {
         ref.current?.scrollIntoView({behavior: 'smooth'})
     }, [message])
 
-    const {text, senderId, time, id, photo} = message
-
+    
     const styles = {
         container: `overflow-hidden px-[1em] py-[1em]`,
         wrapper: `flex justify-start`,
@@ -28,10 +27,10 @@ const Message = ({message, currentUser, friend}) => {
         img: `w-[40%]`
     }
 
-    console.log('the message: ', message)
+    // console.log('the message: ', message)
     return (
         <div className={styles.container}>
-            <div className={`${styles.wrapper} ${senderId === currentUser.uid ? styles.reverse: ''}`}>
+            <div ref={ref} className={`${styles.wrapper} ${senderId === currentUser.uid ? styles.reverse: ''}`}>
                 <div className={styles.userinfo}>
                     <div className={styles.imgcontainer}>
                         <img className={styles.image} src={senderId === currentUser.uid ? currentUser.photoURL : friend.photoURL} alt="" />

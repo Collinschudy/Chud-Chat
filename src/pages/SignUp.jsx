@@ -72,7 +72,7 @@ const SignUp = () => {
                         await updateProfile(user, {
                             displayName,
                             photoURL: URL
-                        })
+                        });
                         const createdAt = new Date().toDateString()
                         await setDoc(doc(db, 'chudChatUsers', user.uid), {
                             uid: user.uid,

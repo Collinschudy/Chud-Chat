@@ -32,7 +32,7 @@ function App({ currentUser, setActiveUser }) {
     return () => {
       unsub();
     }
-  }, [])
+  })
   return (
     <div className={styles.container}>
       <Routes>

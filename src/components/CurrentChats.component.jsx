@@ -16,7 +16,7 @@ const CurrentChats = ({ currentUser, setfoundFriend }) => {
         name: `text-[1.5em]`
     }
 
-    const [chats, setChats] = useState(null);
+    const [chats, setChats] = useState([]);
 
     useEffect(() => {
         const getChats = () => {

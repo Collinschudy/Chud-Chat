@@ -41,7 +41,7 @@ const MessageInput = ({ currentUser, friend }) => {
           getDownloadURL(storageRef).then(async (url) => {
             console.log(url);
             await updateDoc(doc(db, "chats", friend.combinedId), {
-              message: arrayUnion({
+              messages: arrayUnion({
                 id: chatId,
                 text,
                 senderId: senderId,
@@ -55,7 +55,7 @@ const MessageInput = ({ currentUser, friend }) => {
     }
     else{
       await updateDoc(doc(db, "chats", friend.combinedId), {
-        message: arrayUnion({
+        messages: arrayUnion({
           id: chatId,
           text,
           senderId: senderId,
@@ -68,13 +68,13 @@ const MessageInput = ({ currentUser, friend }) => {
 
     await updateDoc(doc(db, "userChats", currentUser.uid), {
       [friend.combinedId + ".lastMessage"]: {
-        text: `${text.substring(0, 20)}${text.length >= 20 ? '...' : ''}`,
+        text: `${text.substring(0, 20)}${text.length >= 25 ? '...' : ''}`,
       },
       [friend.combinedId + ".date"]: serverTimestamp(),
     });
      await updateDoc(doc(db, "userChats", friend.uid), {
        [friend.combinedId + ".lastMessage"]: {
-         text: `${text.substring(0, 20)}${text.length >= 20 ? "..." : ''}`,
+         text: `${text.substring(0, 20)}${text.length >= 25 ? "..." : ''}`,
        },
        [friend.combinedId + ".date"]: serverTimestamp(),
      });

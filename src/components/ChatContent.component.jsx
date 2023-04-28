@@ -17,25 +17,21 @@ const ChatContent = ({ friend }) => {
   useEffect(() => {
     const getMessages = () => {
       const unsub = onSnapshot(doc(db, "chats", friend.combinedId), (doc) => {
-        doc.exists() && setMessages(doc.data().message);
+        doc.exists() && setMessages(doc.data().messages);
       });
       return () => {
         unsub();
       }
 
-    }
+    };
     friend.combinedId && getMessages()
 
-  }, [friend.combinedId])
+  }, [friend.combinedId]);
 
   return (
     <div className={styles.container}>
       {messages && messages.map((message, idx) => {
-        return (
-
-          <Message message={message} key={message.id}/>
-
-        )
+        return <Message message={message} key={message.id + idx}/>
       })}
     </div>
   )

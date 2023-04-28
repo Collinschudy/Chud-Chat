@@ -19,26 +19,20 @@ const Search = ({currentUser}) => {
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         setFoundUser(doc.data());
-        console.log(foundUser)
       });
     } catch(err){
-      console(err.code, err.message)
+      console.log('Error at handleSearch() in the Search component: ', err.code, err.message)
     }
    
-    
-    
   }
   const handleKey = (e) => {
     e.code === "Enter" && handleSearch()
-  }
-  const handleSearchUserChange = e => {
-    setSearchUser(e.target.value)
   }
 
   const handleSelect = async () => {
     const combinedId = currentUser.uid + foundUser.uid;
     try {
-      const chatRef = await getDoc(doc(db, 'chats', combinedId))
+      const chatRef = await getDoc(doc(db, 'chats', combinedId));
 
       if (!chatRef.exists()){
         await setDoc(doc(db, 'chats', combinedId), {messages: []});
@@ -48,24 +42,24 @@ const Search = ({currentUser}) => {
             uid: foundUser.uid,
             chudChatHandle: foundUser.chudChatHandle,
             photoURL: foundUser.photoURL,
-            combinedId,
+            combinedId: combinedId,
           },
           [combinedId+'.date']: serverTimestamp(),
-        })
+        });
 
         await updateDoc(doc(db, 'userChats', foundUser.uid), {
           [combinedId+'.userDetails']: {
             uid: currentUser.uid,
             chudChatHandle: currentUser.chudChatHandle,
             photoURL: currentUser.photoURL,
-            combinedId,
+            combinedId: combinedId,
           },
           [combinedId+'.date']: serverTimestamp(),
-        })
+        });
       }
     } 
     catch (error) {
-      console.log(error.code, error.message)
+      console.log('Error at handleSelect() in the search component: ', error.code, error.message)
     }
     setFoundUser(null)
     setSearchUser('')
@@ -88,23 +82,19 @@ const Search = ({currentUser}) => {
             <AiOutlineSearch className="h-5 w-5 fill-slate-500" />
           </span>
           <input className={styles.input} type="text" placeholder='search friend to start a new chat' 
-          onChange={handleSearchUserChange} 
+          onChange={(e) => setSearchUser(e.target.value)} 
           onKeyDown={handleKey} 
           value={searchUser}
           />
         </div>
-       { foundUser ? <div className={styles.founduser} onClick={handleSelect}>
+       { foundUser && <div className={styles.founduser} onClick={handleSelect}>
           <div className={styles.imagecontainer}>
             <img className={styles.userimage} src={foundUser.photoURL} alt="avatar" />
           </div>
           <div className={styles.foundusername}>
             <span>{foundUser.chudChatHandle}</span>
           </div>
-        </div>
-        : searchUser.trim() === '' ?
-        ''
-      :
-      <div>user not found</div>}
+        </div>}
       </div>
       <hr className='mb-[1em] bg-sky-900 border-none h-[1px]' />
     </>
