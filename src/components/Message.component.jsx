@@ -14,11 +14,11 @@ const Message = ({ message, currentUser, friend }) => {
 
 
     const styles = {
-        container: `overflow-hidden px-[1em] py-[1em]`,
+        messagecontainer: `overflow-hidden px-[1em]  flex`,
         imgcontainer: `sm:w-[3em] sm:h-[3em] rounded-full hidden sm:block`,
         image: `w-[100%] h-[100%] object-cover rounded-full`,
-        img: `w-[70%] h-[10em] object-cover`,
-        messageBox1: `w-[100%] sm:min-h-[2em] sm:flex sm:justify-end`,
+        img: `w-[50%] h-[12em] sm:w-[100%] h-[10em] sm:object-cover mb-[1em]`,
+        messageBox1: `w-[100%] sm:min-h-[1em] sm:flex sm:justify-end`,
         messageBox2: `w-[100%] sm:min-h-[2em] sm:flex sm:justify-start`,
         imageAndTime1: `flex sm:flex-col sm:items-center sm:w-[3.8em] sm:h-[100%] sm:order-2 min-h-[1em] order-2 justify-end`,
         imageAndTime2: `flex sm:flex-col r-black sm:w-[3.8em] sm:items-center sm:h-[100%]`,
@@ -30,7 +30,7 @@ const Message = ({ message, currentUser, friend }) => {
 
     // console.log('the message: ', message)
     return (
-        <div className={styles.container}>
+        <div className={styles.messagecontainer}>
             
             <div ref={ref} className={`${senderId === currentUser.uid ? styles.messageBox1 : styles.messageBox2}`}>
 

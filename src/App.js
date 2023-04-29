@@ -36,7 +36,7 @@ const navigate = useNavigate()
           console.log(currentUser)
         })
       }else{
-        navigate('/')
+        navigate('signin')
       }
       
     });

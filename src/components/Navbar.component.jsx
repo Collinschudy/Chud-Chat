@@ -10,26 +10,29 @@ import { selectProfileView } from '../redux/profile-view/profileview.selector';
 import { useState } from 'react';
 
 const Navbar = ({ hidden, toggleProfileView, currentUser }) => {
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(false);
+  const name = currentUser.chudChatHandle;
+  const nameCap = name.charAt(0).toUpperCase() + name.slice(1);
 
   const styles = {
     container: `w-[90%] flex items-center justify-between m-auto mt-[1em] bg-sky-900 rounded-tl-[2em] rounded-bl-[2em] rounded-tr rounded-br relative`,
     avatar: `w-[3em] h-[3em] rounded-full object-cover`,
     username: `flex items-center text-[1.5em] min-w-[30%] justify-between relative`,
-    logout: `bg-white text-black h-[4em] absolute flex flex-col text-[0.7em] p-[0.5em] rounded top-[2em] right-[0] z-40`,
+    logout: `border border-black bg-white text-black h-[4em] absolute flex flex-col text-[0.7em] p-[0.5em] rounded top-[2em] right-[0] z-40`,
     hide: `hidden`
-  }
+  };
   return (
     <div className={styles.container}>
       <div className={styles.imageContainer}>
         <img className={styles.avatar} src={currentUser.photoURL} alt="avatar of user" />
       </div>
+      
       <div className={styles.username}>
-        {currentUser.chudChatHandle} <span><HiDotsVertical onClick={() => {setShow(!show)}} /></span>
+        {nameCap} <span><HiDotsVertical onClick={() => {setShow(!show)}} /></span>
           {show ? 
           (<div className={styles.logout}>
-            <span>Profile</span>
-            <span onClick={() => signOut(auth)}>sign out</span>
+            <span className='cursor-pointer'>Profile</span>
+            <span  className='cursor-pointer' onClick={() => signOut(auth)}>sign out</span>
           </div>)
           :
           ''

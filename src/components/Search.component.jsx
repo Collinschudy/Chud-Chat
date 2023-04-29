@@ -13,7 +13,7 @@ const Search = ({ currentUser }) => {
 
   const handleSearch = async () => {
     const userRef = collection(db, 'chudChatUsers')
-    const q = query(userRef, where("chudChatHandle", "==", searchUser));
+    const q = query(userRef, where("chudChatHandle", "==", searchUser.toLowerCase()));
 
     try {
       const querySnapshot = await getDocs(q);
