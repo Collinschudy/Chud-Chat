@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 const TopChatBar = ({friend}) => {
   const { chudChatHandle } = friend;
-  console.log(friend)
+  
   
     const styles = {
         container: `w-[100%] h-[4em] bg-slate-300`,
@@ -23,7 +23,7 @@ const TopChatBar = ({friend}) => {
   )
 }
 const mapStateToProps = createStructuredSelector({
-  friend: selectFriendChat
+  friend: selectFriendChat,
 })
 
 

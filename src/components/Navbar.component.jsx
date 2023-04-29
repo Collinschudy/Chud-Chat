@@ -25,7 +25,7 @@ const Navbar = ({ hidden, toggleProfileView, currentUser }) => {
         <img className={styles.avatar} src={currentUser.photoURL} alt="avatar of user" />
       </div>
       <div className={styles.username}>
-        {currentUser.displayName} <span><HiDotsVertical onClick={() => {setShow(!show)}} /></span>
+        {currentUser.chudChatHandle} <span><HiDotsVertical onClick={() => {setShow(!show)}} /></span>
           {show ? 
           (<div className={styles.logout}>
             <span>Profile</span>

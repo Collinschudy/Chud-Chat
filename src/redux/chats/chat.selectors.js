@@ -4,5 +4,5 @@ const selectFriend = state => state.friend;
 
 export const selectFriendChat = createSelector(
   [selectFriend],
-  friend => friend.friendToChat
+  (friend )=> friend.friendToChat
 )

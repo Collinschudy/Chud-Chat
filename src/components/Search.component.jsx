@@ -6,8 +6,8 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../redux/user/userSelector';
 
-const Search = ({currentUser}) => {
-  const [searchUser, setSearchUser] = useState('');
+const Search = ({ currentUser }) => {
+  const [searchUser, setSearchUser] = useState("");
   const [foundUser, setFoundUser] = useState(null);
 
 
@@ -20,13 +20,13 @@ const Search = ({currentUser}) => {
       querySnapshot.forEach((doc) => {
         setFoundUser(doc.data());
       });
-    } catch(err){
+    } catch (err) {
       console.log('Error at handleSearch() in the Search component: ', err.code, err.message)
     }
-   
-  }
+
+  };
   const handleKey = (e) => {
-    e.code === "Enter" && handleSearch()
+    e.code === "Enter" && handleSearch();
   }
 
   const handleSelect = async () => {
@@ -34,38 +34,38 @@ const Search = ({currentUser}) => {
     try {
       const chatRef = await getDoc(doc(db, 'chats', combinedId));
 
-      if (!chatRef.exists()){
-        await setDoc(doc(db, 'chats', combinedId), {messages: []});
+      if (!chatRef.exists()) {
+        await setDoc(doc(db, 'chats', combinedId), { messages: [] });
 
         await updateDoc(doc(db, 'userChats', currentUser.uid), {
-          [combinedId+'.userDetails']: {
+          [combinedId + '.userDetails']: {
             uid: foundUser.uid,
             chudChatHandle: foundUser.chudChatHandle,
             photoURL: foundUser.photoURL,
-            combinedId: combinedId,
+            combinedId,
           },
-          [combinedId+'.date']: serverTimestamp(),
+          [combinedId + '.date']: serverTimestamp(),
         });
 
         await updateDoc(doc(db, 'userChats', foundUser.uid), {
-          [combinedId+'.userDetails']: {
+          [combinedId + '.userDetails']: {
             uid: currentUser.uid,
             chudChatHandle: currentUser.chudChatHandle,
             photoURL: currentUser.photoURL,
-            combinedId: combinedId,
+            combinedId,
           },
-          [combinedId+'.date']: serverTimestamp(),
+          [combinedId + '.date']: serverTimestamp(),
         });
       }
-    } 
+    }
     catch (error) {
       console.log('Error at handleSelect() in the search component: ', error.code, error.message)
     }
-    setFoundUser(null)
-    setSearchUser('')
+    setFoundUser(null);
+    setSearchUser('');
   };
 
-  
+
   const styles = {
     container: `w-[90%] m-auto flex flex-col justfy-around mt-[1em] mb-[0.5em]`,
     inputform: `w-[100%] relative z-100`,
@@ -81,20 +81,25 @@ const Search = ({currentUser}) => {
           <span className="absolute inset-y-0 left-0 flex items-center pl-2 z-0">
             <AiOutlineSearch className="h-5 w-5 fill-slate-500" />
           </span>
-          <input className={styles.input} type="text" placeholder='search friend to start a new chat' 
-          onChange={(e) => setSearchUser(e.target.value)} 
-          onKeyDown={handleKey} 
-          value={searchUser}
+          <input
+            className={styles.input}
+            type="text"
+            placeholder='search friend to start a new chat'
+            onChange={(e) => setSearchUser(e.target.value)}
+            onKeyDown={handleKey}
+            value={searchUser}
           />
         </div>
-       { foundUser && <div className={styles.founduser} onClick={handleSelect}>
+        {foundUser && (
+        <div className={styles.founduser} onClick={handleSelect}>
           <div className={styles.imagecontainer}>
             <img className={styles.userimage} src={foundUser.photoURL} alt="avatar" />
           </div>
           <div className={styles.foundusername}>
             <span>{foundUser.chudChatHandle}</span>
           </div>
-        </div>}
+        </div>
+        )}
       </div>
       <hr className='mb-[1em] bg-sky-900 border-none h-[1px]' />
     </>

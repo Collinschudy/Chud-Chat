@@ -4,43 +4,54 @@ import { selectFriendChat } from '../redux/chats/chat.selectors';
 import { connect } from 'react-redux';
 import { useRef } from 'react';
 import { useEffect } from 'react';
-const Message = ({message, currentUser, friend}) => {
-    const {text, senderId, time, photo} = message
+const Message = ({ message, currentUser, friend }) => {
+    const { text, senderId, time, photo } = message
     const ref = useRef();
 
     useEffect(() => {
-        ref.current?.scrollIntoView({behavior: 'smooth'})
+        ref.current?.scrollIntoView({ behavior: 'smooth' })
     }, [message])
 
-    
+
     const styles = {
         container: `overflow-hidden px-[1em] py-[1em]`,
-        wrapper: `flex justify-start`,
-        reverse: `flex flex-row-reverse`,
-        userinfo: `w-[6em] sm:w-[3.5em]`,
-        imgcontainer: `w-[3em] h-[3em] rounded-full`,
+        imgcontainer: `sm:w-[3em] sm:h-[3em] rounded-full hidden sm:block`,
         image: `w-[100%] h-[100%] object-cover rounded-full`,
-        messagecontent: `flex flex-col justify-center items-end`,
-        contentreverse: `flex items-start justify-center flex-col`,
-        message: `ml-[1em] bg-gray-100 flex items-center justify-start px-[1em] py-[1em] rounded-bl-[1em] rounded-r-[1em] border border-sky-200`,
-        handler: `bg-sky-700 rounded-l-[1em] rounded-br-[1em] text-white py-[1em] px-[1em] justify-start mr-[1em] items-center`,
-        img: `w-[40%]`
+        img: `w-[70%] h-[10em] object-cover`,
+        messageBox1: `w-[100%] sm:min-h-[2em] sm:flex sm:justify-end`,
+        messageBox2: `w-[100%] sm:min-h-[2em] sm:flex sm:justify-start`,
+        imageAndTime1: `flex sm:flex-col sm:items-center sm:w-[3.8em] sm:h-[100%] sm:order-2 min-h-[1em] order-2 justify-end`,
+        imageAndTime2: `flex sm:flex-col r-black sm:w-[3.8em] sm:items-center sm:h-[100%]`,
+        messagecontent: ` sm:w-[30%] w-[100%] sm:min-h-[1em] sm:flex sm:justify-end flex justify-end flex-col items-end`,
+        messagecontentreverse: ` sm:w-[30%] w-[100%] min-h-[1em] flex flex-col sm:justify-start flex justify-start items-start`,
+        handlermessage: `bg-sky-700 text-white p-[0.7em] rounded-l-[0.6em] rounded-br-[0.6em] sm:max-w-[100%] max-w-[60%]`,
+        friendmessage: `border border-sky-200 rounded-bl-[0.6em] rounded-r-[0.6em] p-[0.7em] sm:max-w-[100%] max-w-[60%]`
     }
 
     // console.log('the message: ', message)
     return (
         <div className={styles.container}>
-            <div ref={ref} className={`${styles.wrapper} ${senderId === currentUser.uid ? styles.reverse: ''}`}>
-                <div className={styles.userinfo}>
+            
+            <div ref={ref} className={`${senderId === currentUser.uid ? styles.messageBox1 : styles.messageBox2}`}>
+
+                <div className={`${senderId === currentUser.uid ? styles.imageAndTime1 : styles.imageAndTime2}`}>
+
                     <div className={styles.imgcontainer}>
                         <img className={styles.image} src={senderId === currentUser.uid ? currentUser.photoURL : friend.photoURL} alt="" />
                     </div>
-                    <span className='text-gray-400 text-[0.8em]'>{time}</span>
+                    <p className='text-gray-400 text-[0.8em]'>{time}</p>
+
                 </div>
-                <div className={`${senderId === currentUser.uid ? styles.messagecontent : styles.contentreverse}`}>
-                    <p className={`${senderId === currentUser.uid ? styles.handler : styles.message} mb-[3em]`}>{text}</p>
+
+                <div className={`${senderId === currentUser.uid ? styles.messagecontent : styles.messagecontentreverse}`}>
+
+                    <p className={`${senderId === currentUser.uid ? styles.handlermessage : styles.friendmessage} mb-[1em]`}>{text}</p>
                     {photo && <img className={styles.img} src={photo} alt="" />}
+                    
+
                 </div>
+                
+
             </div>
         </div>
     )

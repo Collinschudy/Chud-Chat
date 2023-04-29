@@ -12,12 +12,12 @@ const ChatContent = ({ friend }) => {
     container: `h-[calc(100%-8em)] overflow-scroll`
   }
 
-  const [messages, setMessages] = useState([]);
+  const [message, setMessage] = useState([]);
 
   useEffect(() => {
     const getMessages = () => {
       const unsub = onSnapshot(doc(db, "chats", friend.combinedId), (doc) => {
-        doc.exists() && setMessages(doc.data().messages);
+        doc.exists() && setMessage(doc.data().message);
       });
       return () => {
         unsub();
@@ -30,8 +30,8 @@ const ChatContent = ({ friend }) => {
 
   return (
     <div className={styles.container}>
-      {messages && messages.map((message, idx) => {
-        return <Message message={message} key={message.id + idx}/>
+      {message && message.map((details, idx) => {
+        return <Message message={details} key={details.id + idx}/>
       })}
     </div>
   )

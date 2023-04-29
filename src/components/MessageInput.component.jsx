@@ -18,7 +18,14 @@ const MessageInput = ({ currentUser, friend }) => {
   const senderId = currentUser.uid;
   const date = Timestamp.now()
   const chatId = Date.now().toString();
-  const time = new Date().toLocaleTimeString();
+ 
+  var dt = new Date();
+  var hours = dt.getHours(); 
+  var AmOrPm = hours >= 12 ? 'PM' : 'AM';
+  hours = (hours % 12) || 12;
+  var minutes = dt.getMinutes();
+  var time = hours + ":" + minutes + " " + AmOrPm;
+
 
 
   const styles = {
@@ -29,7 +36,7 @@ const MessageInput = ({ currentUser, friend }) => {
   }
 
   const handleSendMsg = async () => {
-    
+
     if (text === '' || text.trim() === '') {
       return;
     }
@@ -41,21 +48,21 @@ const MessageInput = ({ currentUser, friend }) => {
           getDownloadURL(storageRef).then(async (url) => {
             console.log(url);
             await updateDoc(doc(db, "chats", friend.combinedId), {
-              messages: arrayUnion({
+              message: arrayUnion({
                 id: chatId,
                 text,
                 senderId: senderId,
                 date: date,
                 photo: url,
-                time:time,
+                time: time,
               }),
             });
           });
         });
     }
-    else{
+    else {
       await updateDoc(doc(db, "chats", friend.combinedId), {
-        messages: arrayUnion({
+        message: arrayUnion({
           id: chatId,
           text,
           senderId: senderId,
@@ -68,19 +75,22 @@ const MessageInput = ({ currentUser, friend }) => {
 
     await updateDoc(doc(db, "userChats", currentUser.uid), {
       [friend.combinedId + ".lastMessage"]: {
-        text: `${text.substring(0, 20)}${text.length >= 25 ? '...' : ''}`,
+        text: `${text.substring(0, 25)}${text.length >= 25 ? '...' : ''}`,
       },
       [friend.combinedId + ".date"]: serverTimestamp(),
     });
-     await updateDoc(doc(db, "userChats", friend.uid), {
-       [friend.combinedId + ".lastMessage"]: {
-         text: `${text.substring(0, 20)}${text.length >= 25 ? "..." : ''}`,
-       },
-       [friend.combinedId + ".date"]: serverTimestamp(),
-     });
+    await updateDoc(doc(db, "userChats", friend.uid), {
+      [friend.combinedId + ".lastMessage"]: {
+        text: `${text.substring(0, 25)}${text.length >= 25 ? "..." : ''}`,
+      },
+      [friend.combinedId + ".date"]: serverTimestamp(),
+    });
 
-     setText('');
-     setImg(null);
+    setText('');
+    setImg(null);
+  }
+  const handleEnter = e => {
+    e.code === 'Enter' && handleSendMsg();
   }
 
   return (
@@ -102,6 +112,7 @@ const MessageInput = ({ currentUser, friend }) => {
             placeholder='Type your message'
             value={text}
             onChange={(e) => setText(e.target.value)}
+            onKeyDown={handleEnter}
           />
         </div>
         <BsFillSendFill onClick={handleSendMsg} />

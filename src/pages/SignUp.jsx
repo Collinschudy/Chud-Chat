@@ -60,7 +60,6 @@ const SignUp = () => {
 
         try {
             const { user } = await createUserWithEmailAndPassword(auth, email, password)
-            console.log(user)
             const storageRef = ref(storage, displayName);
 
             uploadBytesResumable(storageRef, avatar).then(
@@ -155,7 +154,7 @@ const SignUp = () => {
                         onChange={handleAvatar}
                         id="photo" />
                     <label htmlFor="photo" className={style.label}>
-                        <img src={avi} alt='' className={style.avatar} />
+                        <img src={avi} alt='add image icon' className={style.avatar} />
                         <span className={style.avatardesc}>choose a profile picture</span>
                     </label>
                     <Button signup>Sign Up</Button>

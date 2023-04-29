@@ -9,6 +9,9 @@ import { setCurrentUser } from './redux/user/user.actions';
 import { auth } from './firebase/firebase.utils';
 import { selectCurrentUser } from './redux/user/userSelector';
 import { createStructuredSelector } from 'reselect';
+import { onSnapshot, doc } from 'firebase/firestore';
+import { db } from './firebase/firebase.utils';
+import { useNavigate } from 'react-router-dom';
 
 
 function App({ currentUser, setActiveUser }) {
@@ -18,33 +21,39 @@ function App({ currentUser, setActiveUser }) {
 
   const ProcRoute = ({ children }) => {
     if (!currentUser) {
-      console.log(currentUser)
       return <Navigate to='signin' />
 
     }
     return children;
   }
-
+const navigate = useNavigate()
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
-      setActiveUser(user);
+      if(user){
+        const ref = doc(db, 'chudChatUsers', user.uid);
+        onSnapshot(ref, (snapDoc) => {
+          setActiveUser({id: snapDoc.id, ...snapDoc.data()})
+          console.log(currentUser)
+        })
+      }else{
+        navigate('/')
+      }
+      
     });
-    return () => {
-      unsub();
-    }
-  })
+    return () => unsub();
+  }, [])
   return (
     <div className={styles.container}>
       <Routes>
-        <Route path='/' element={<ProcRoute><HomePage /></ProcRoute>  } />
-        <Route exact path='signin' element={<SignIn />} />
-        <Route exact path='signup' element={<SignUp />} />
+        <Route path='/' element={ <ProcRoute><HomePage /></ProcRoute>  } />
+        <Route exact path='signin' element={ <SignIn /> } />
+        <Route exact path='signup' element={ <SignUp />} />
       </Routes>
     </div>
   );
 }
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser,
 })
 
 const mapDispatchToProps = dispatch => ({
