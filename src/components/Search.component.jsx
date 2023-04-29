@@ -79,7 +79,7 @@ const Search = ({ currentUser }) => {
       <div className={styles.container}>
         <div className={styles.inputform}>
           <span className="absolute inset-y-0 left-0 flex items-center pl-2 z-0">
-            <AiOutlineSearch className="h-5 w-5 fill-slate-500" />
+            <AiOutlineSearch className="h-5 w-5 fill-slate-500" onClick={handleSearch}/>
           </span>
           <input
             className={styles.input}
