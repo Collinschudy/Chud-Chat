@@ -12,7 +12,7 @@ import { useState } from 'react';
 const Navbar = ({ hidden, toggleProfileView, currentUser }) => {
   const [show, setShow] = useState(false);
   const name = currentUser.chudChatHandle;
-  const nameCap = name.charAt(0).toUpperCase() + name.slice(1);
+  const nameCap = name?.charAt(0).toUpperCase() + name?.slice(1);
 
   const styles = {
     container: `w-[90%] flex items-center justify-between m-auto mt-[1em] bg-sky-900 rounded-tl-[2em] rounded-bl-[2em] rounded-tr rounded-br relative`,

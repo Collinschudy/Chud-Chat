@@ -32,7 +32,7 @@ const TopChatBar = ({ friend, currentUser }) => {
   }
 
   const styles = {
-    container: `w-[100%] h-[4em] bg-slate-300`,
+    container: ` w-[100%] h-[4em] bg-slate-300`,
     topbar: `flex items-center justify-between w-[96%] m-auto h-[100%] relative`,
     name: `text-[1.5em]`,
     clearChat: `border border-black bg-white px-[.5em] py-[0.2em] absolute top-12 right-0 w-[6em] cursor-pointer`
