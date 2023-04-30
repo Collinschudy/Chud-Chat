@@ -15,9 +15,10 @@ const Navbar = ({ hidden, toggleProfileView, currentUser }) => {
   const nameCap = name?.charAt(0).toUpperCase() + name?.slice(1);
 
   const styles = {
-    container: `w-[90%] flex items-center justify-between m-auto mt-[1em] bg-sky-900 rounded-tl-[2em] rounded-bl-[2em] rounded-tr rounded-br relative`,
-    avatar: `w-[3em] h-[3em] rounded-full object-cover`,
-    username: `flex items-center text-[1.5em] min-w-[30%] justify-between relative`,
+    container: `w-[100%] h-[4em] flex items-center justify-between m-auto bg-sky-900 relative`,
+    avatar: `w-[100%] h-[100%] rounded-[18%] object-cover`,
+    imageContainer: `w-[3.2em] h-[3.2em] ml-[0.7em] border-2 border-slate-500 rounded-[20%] `,
+    username: `flex items-center text-[1.5em] min-w-[25%] justify-around relative`,
     logout: `border border-black bg-white text-black h-[4em] absolute flex flex-col text-[0.7em] p-[0.5em] rounded top-[2em] right-[0] z-40`,
     hide: `hidden`
   };

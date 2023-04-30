@@ -9,6 +9,7 @@ const SignIn = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    
 
 
     const style = {
@@ -35,6 +36,7 @@ const SignIn = () => {
 
         try {
             await signInWithEmailAndPassword(auth, email, password);
+       
             setEmail('');
             setPassword('');
             navigate('/');
@@ -47,6 +49,7 @@ const SignIn = () => {
         }
 
     }
+  
     return (
         <div className={style.formWrapper}>
             <div className={style.formContainer}>

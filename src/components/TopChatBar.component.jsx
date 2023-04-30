@@ -20,7 +20,9 @@ const TopChatBar = ({ friend, currentUser }) => {
         const collectionRef = doc(db, 'userChats', currentUser.uid);
         await updateDoc(collectionRef, {
           [friend.combinedId]: deleteField()
+          
         });
+        alert('chats deleted')
 
       } catch (error) {
         console.log(error.message)
@@ -40,7 +42,7 @@ const TopChatBar = ({ friend, currentUser }) => {
   return (
     <div className={styles.container}>
       <div className={styles.topbar}>
-        {friend && <span className={styles.name}>{nameCap}</span>}
+        {friend && <span className={styles.name}>{typeof nameCap === 'string' ? String(nameCap) : ''}</span>}
         <span className='text-[1.5em]'>
           < HiDotsVertical onClick={() => {setShow(!show)}} />
           {show ? <span className={styles.clearChat}

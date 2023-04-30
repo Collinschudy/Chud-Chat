@@ -29,7 +29,7 @@ const MessageInput = ({ currentUser, friend }) => {
 
 
   const styles = {
-    container: `h-[4em] bg-slate-100 border-t border-sky-300`,
+    container: `h-[4em] bg-slate-300 border-t border-sky-300`,
     wrapper: `flex items-center justify-between w-[96%] h-[100%] m-auto`,
     inputcontainer: `h-[100%] flex items-center w-[90%]`,
     input: `placeholder:italic w-full focus:outline-none h-[80%]`

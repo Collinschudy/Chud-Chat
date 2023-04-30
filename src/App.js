@@ -3,7 +3,7 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import HomePage from './pages/HomePage';
 import { connect } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { setCurrentUser } from './redux/user/user.actions';
 import { auth } from './firebase/firebase.utils';
@@ -14,7 +14,9 @@ import { db } from './firebase/firebase.utils';
 import { useNavigate } from 'react-router-dom';
 
 
+
 function App({ currentUser, setActiveUser }) {
+
   const styles = {
     container: ``
   }
@@ -42,6 +44,7 @@ const navigate = useNavigate()
     });
     return () => unsub();
   }, [])
+
   return (
     <div className={styles.container}>
       <Routes>

@@ -36,21 +36,24 @@ const CurrentChats = ({ currentUser, setfoundFriend }) => {
     return (
         <div className={styles.container}>
             {friend && Object.entries(friend)?.sort((a, b) => b[1].date - a[1].date).map((selectedFriend) => {
+
+                const name = selectedFriend[1].userDetails.chudChatHandle;
+                const nameCap = name?.charAt(0).toUpperCase() + name?.slice(1);
                 return (
                     <>
                         <div
                             className={styles.currentchat}
                             key={selectedFriend[0]}
-                            onClick={() => {setfoundFriend(selectedFriend[1].userDetails)}}
+                            onClick={() => { setfoundFriend(selectedFriend[1].userDetails) }}
                         >
                             {console.log('details: ', selectedFriend[1].userDetails)}
-                            <img 
-                            className={styles.chatimg} 
-                            src={selectedFriend[1]?.userDetails?.photoURL} 
-                            alt="avatar" 
+                            <img
+                                className={styles.chatimg}
+                                src={selectedFriend[1]?.userDetails?.photoURL}
+                                alt="avatar"
                             />
                             <div className={styles.details}>
-                                <span className={styles.name}>{selectedFriend[1]?.userDetails?.chudChatHandle}</span>
+                                <span className={styles.name}>{nameCap}</span>
                                 <p className='italic'>{selectedFriend[1].lastMessage?.text}</p>
                             </div>
                         </div>

@@ -9,7 +9,7 @@ import { db } from '../firebase/firebase.utils';
 
 const ChatContent = ({ friend }) => {
   const styles = {
-    container: `pt-[1em] h-[calc(100%-8em)] overflow-y-scroll overflow-x-hidden`
+    container: `pt-[1em] h-[calc(100%-8em)] overflow-y-scroll overflow-x-hidden [&::-webkit-scrollbar]:hidden`
   }
 
   const [message, setMessage] = useState([]);
