@@ -67,7 +67,7 @@ const SignIn = () => {
                     <Button signup>Sign In</Button>
 
                 </form>
-                <div>
+                <div className="mt-[2em]">
                     Don't have an account? <span className={style.spansignup} onClick={() => navigate('/signup')}>sign up</span> here
                 </div>
 
