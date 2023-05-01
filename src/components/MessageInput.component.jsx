@@ -82,7 +82,7 @@ const MessageInput = ({ currentUser, friend }) => {
     });
     await updateDoc(doc(db, "userChats", friend.uid), {
       [friend.combinedId + ".lastMessage"]: {
-        text: `${text.substring(0, 25)}${text.length >= 25 ? "..." : ''}`,
+        text: `${text.substring(0, 40)}${text.length >= 40 ? "..." : ''}`,
       },
       [friend.combinedId + ".date"]: serverTimestamp(),
     });

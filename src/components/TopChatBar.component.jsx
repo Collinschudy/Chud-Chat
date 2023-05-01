@@ -22,7 +22,7 @@ const TopChatBar = ({ friend, currentUser }) => {
           [friend.combinedId]: deleteField()
           
         });
-        alert('chats deleted')
+        alert('chats deleted, refresh your page to see changes')
 
       } catch (error) {
         console.log(error.message)
@@ -37,14 +37,14 @@ const TopChatBar = ({ friend, currentUser }) => {
     container: ` w-[100%] h-[4em] bg-slate-300`,
     topbar: `flex items-center justify-between w-[96%] m-auto h-[100%] relative`,
     name: `text-[1.5em]`,
-    clearChat: `border border-black bg-white px-[.5em] py-[0.2em] absolute top-12 right-0 w-[6em] cursor-pointer`
+    clearChat: `border border-black bg-white px-[.5em] py-[0.2em] absolute top-12 right-0 w-[6em] cursor-pointer text-[1em]`
   }
   return (
     <div className={styles.container}>
       <div className={styles.topbar}>
         {friend && <span className={styles.name}>{typeof nameCap === 'string' ? String(nameCap) : ''}</span>}
-        <span className='text-[1.5em]'>
-          < HiDotsVertical onClick={() => {setShow(!show)}} />
+        <span>
+          < HiDotsVertical onClick={() => {setShow(!show)}} className='text-[1.5em]'/>
           {show ? <span className={styles.clearChat}
           onClick={clearChat}>
             Clear chat
