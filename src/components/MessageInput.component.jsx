@@ -24,15 +24,16 @@ const MessageInput = ({ currentUser, friend }) => {
   var AmOrPm = hours >= 12 ? 'PM' : 'AM';
   hours = (hours % 12) || 12;
   var minutes = dt.getMinutes();
-  var time = hours + ":" + minutes + " " + AmOrPm;
+  
+  var time = hours + ":" + (minutes < 10 ? '0':'') + minutes + " " + AmOrPm;
 
 
 
   const styles = {
     container: `h-[4em] bg-slate-300 border-t border-sky-300`,
-    wrapper: `flex items-center justify-between w-[96%] h-[100%] m-auto`,
-    inputcontainer: `h-[100%] flex items-center w-[90%]`,
-    input: `placeholder:italic w-full focus:outline-none h-[80%]`
+    wrapper: `flex items-center justify-between w-[92%] h-[100%] m-auto`,
+    inputcontainer: `h-[100%] flex items-center w-[85%]`,
+    input: `placeholder:italic w-full focus:outline-none h-[80%] rounded-xl`
   }
 
   const handleSendMsg = async () => {
@@ -75,7 +76,7 @@ const MessageInput = ({ currentUser, friend }) => {
 
     await updateDoc(doc(db, "userChats", currentUser.uid), {
       [friend.combinedId + ".lastMessage"]: {
-        text: `${text.substring(0, 25)}${text.length >= 25 ? '...' : ''}`,
+        text: `${text.substring(0, 40)}${text.length >= 40 ? '...' : ''}`,
       },
       [friend.combinedId + ".date"]: serverTimestamp(),
     });

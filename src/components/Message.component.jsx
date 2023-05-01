@@ -24,7 +24,7 @@ const Message = ({ message, currentUser, friend }) => {
         imageAndTime2: `flex sm:flex-col r-black sm:w-[3.8em] sm:items-center sm:h-[100%]`,
         messagecontent: ` sm:w-[30%] w-[100%] sm:min-h-[1em] sm:flex sm:justify-end flex justify-end flex-col items-end`,
         messagecontentreverse: ` sm:w-[30%] w-[100%] min-h-[1em] flex flex-col sm:justify-start flex justify-start items-start`,
-        handlermessage: `bg-sky-700 text-white p-[0.4em] rounded-l-[0.6em] rounded-br-[0.6em] sm:max-w-[100%] max-w-[60%]`,
+        handlermessage: `bg-sky-700 text-white p-[0.4em] sm:max-w-[100%] max-w-[60%] sm:rounded-tr-[0.6em] sm:rounded-br-none sm:rounded-l-[0.6em] rounded-br-[0.6em] rounded-l-[0.6em] `,
         friendmessage: `border border-sky-200 rounded-bl-[0.6em] rounded-r-[0.6em] p-[0.4em] sm:max-w-[100%] max-w-[60%]`
     }
 

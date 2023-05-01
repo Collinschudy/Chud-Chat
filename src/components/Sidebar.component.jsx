@@ -14,7 +14,7 @@ const Sidebar = () => {
       <Navbar />
       <Search />
       <CurrentChats />
-      <div className='absolute bottom-0'>
+      <div className='absolute bottom-0 right-2'>
         <Title />
       </div>
     </div>
