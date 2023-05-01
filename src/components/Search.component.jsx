@@ -14,10 +14,17 @@ const Search = ({ currentUser }) => {
   const handleSearch = async () => {
     const userRef = collection(db, 'chudChatUsers')
     const q = query(userRef, where("chudChatHandle", "==", searchUser.toLowerCase()));
+    // if (q === currentUser){
+    //   return
+    // }
 
     try {
+      
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
+        if (doc.data().uid === currentUser.uid){
+          return
+        }
         setFoundUser(doc.data());
       });
     } catch (err) {
