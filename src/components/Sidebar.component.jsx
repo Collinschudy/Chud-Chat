@@ -6,7 +6,7 @@ import CurrentChats from './CurrentChats.component';
 const Sidebar = () => {
 
   const styles = {
-    container: `w-[100%] flex-[0_0_auto] bg-sky-700 text-white sm:w-[35%] relative border-r`
+    container: `w-[100%] flex-[0_0_auto] bg-sky-700 text-white sm:w-[35%] relative`
   }
   return (
     <div className={styles.container}>

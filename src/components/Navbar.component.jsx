@@ -19,7 +19,7 @@ const Navbar = ({ hidden, toggleProfileView, currentUser }) => {
     avatar: `w-[100%] h-[100%] rounded-[18%] object-cover`,
     imageContainer: `w-[3.2em] h-[3.2em] ml-[0.7em] border-2 border-slate-500 rounded-[20%] `,
     username: `flex items-center text-[1.5em] min-w-[25%] justify-around relative`,
-    logout: `border border-black bg-white text-black h-[4em] absolute flex flex-col text-[0.7em] p-[0.5em] rounded top-[2em] right-[0] z-40`,
+    logout: `border border-black bg-white text-black h-[4.5em] absolute flex flex-col text-[0.7em] p-[0.5em] rounded top-[2em] right-[0] z-40 justify-between`,
     hide: `hidden`
   };
   return (

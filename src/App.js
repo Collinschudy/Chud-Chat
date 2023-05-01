@@ -38,7 +38,7 @@ const navigate = useNavigate()
           console.log(currentUser)
         })
       }else{
-        navigate('signin')
+        navigate('/signin')
       }
       
     });

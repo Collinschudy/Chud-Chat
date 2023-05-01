@@ -68,18 +68,19 @@ const Search = ({ currentUser }) => {
 
   const styles = {
     container: `w-[90%] m-auto flex flex-col justfy-around mt-[1em] mb-[0.5em]`,
-    inputform: `w-[100%] relative z-100`,
-    input: `placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none text-black`,
+    inputform: `w-[100%] relative z-100 flex items-center`,
     founduser: `w-[100%] flex items-center mt-[1em]`,
     userimage: `w-[3em] h-[3em] rounded-full object-cover`,
-    foundusername: `text-[1.2em] ml-[1em]`
+    foundusername: `text-[1.2em] ml-[1em]`,
+    input: `mb-[0.5em] py-[0.5em] outline-none bg-transparent border-none w-[70%] placeholder:italic placeholder:text-slate-300`
+    
   }
   return (
     <>
       <div className={styles.container}>
         <div className={styles.inputform}>
-          <span className="absolute inset-y-0 left-0 flex items-center pl-2 z-0">
-            <AiOutlineSearch className="h-5 w-5 fill-slate-500" onClick={handleSearch}/>
+          <span className="absolute inset-y-0 right-[3em] flex items-center pl-2 z-0">
+            <AiOutlineSearch className="h-5 w-5 fill-white-500" onClick={handleSearch}/>
           </span>
           <input
             className={styles.input}
