@@ -46,7 +46,6 @@ const CurrentChats = ({ currentUser, setfoundFriend }) => {
                             key={selectedFriend[0]}
                             onClick={() => { setfoundFriend(selectedFriend[1].userDetails) }}
                         >
-                            {console.log('details: ', selectedFriend[1].userDetails)}
                             <img
                                 className={styles.chatimg}
                                 src={selectedFriend[1]?.userDetails?.photoURL}

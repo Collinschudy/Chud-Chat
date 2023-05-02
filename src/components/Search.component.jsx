@@ -14,9 +14,7 @@ const Search = ({ currentUser }) => {
   const handleSearch = async () => {
     const userRef = collection(db, 'chudChatUsers')
     const q = query(userRef, where("chudChatHandle", "==", searchUser.toLowerCase()));
-    // if (q === currentUser){
-    //   return
-    // }
+   
 
     try {
       
