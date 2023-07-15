@@ -9,12 +9,14 @@ const SignIn = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
+    const [submitting, setSubmitting] = useState(false)
     
 
 
     const style = {
         formWrapper: `h-[100vh] flex items-center justify-center bg-sky-200`,
-        formContainer: `flex min-h-[20em] w-[25em] bg-white rounded-[0.5em] flex flex-col py-[1em] px-[2em]`,
+        formContainer: `flex  h-[100%] sm:min-h-[20em] w-[25em] bg-white sm:rounded-[0.5em] flex flex-col py-[1em] px-[2em]`,
         form: ` flex flex-col  overflow-hidden `,
         input: `border-b border-sky-300 mb-[0.5em] py-[0.5em] outline-none`,
         title: `text-[1.5em] text-center text-sky-900 mb-[1em] font-mono font-bold`,
@@ -35,6 +37,7 @@ const SignIn = () => {
         e.preventDefault();
 
         try {
+            setSubmitting(true)
             await signInWithEmailAndPassword(auth, email, password);
        
             setEmail('');
@@ -45,7 +48,8 @@ const SignIn = () => {
         catch (error) {
             const errCode = error.code;
             const errMessage = error.message;
-            alert(errCode, errMessage)
+            setError(errMessage)
+            // alert(errCode, errMessage)
         }
 
     }
@@ -67,7 +71,9 @@ const SignIn = () => {
                         onChange={handlePassword}
                         className={style.input}
                     />
-                    <Button signup>Sign In</Button>
+                    <div className="text-red-500 text-[14px]">{error}</div>
+                    <Button signup>{submitting ? 'please wait...' : 'log in'}</Button>
+                    
 
                 </form>
                 <div className="mt-[2em]">
