@@ -17,6 +17,8 @@ const SignUp = () => {
     const [avatar, setAvatar] = useState(null);
     const [err1, setErr1] = useState(false);
     const [err, setErr] = useState(false);
+    const [err2, setErr2] = useState(null);
+    const [submitting, setSubmitting] = useState(false)
 
     useEffect(() => {
         let timerId = setInterval(() => {
@@ -35,7 +37,7 @@ const SignUp = () => {
 
     const style = {
         formWrapper: `h-[100vh] flex items-center justify-center bg-sky-200`,
-        formContainer: `flex min-h-[20em] w-[25em] bg-white rounded-[0.5em] flex flex-col py-[1em] px-[2em]`,
+        formContainer: `flex sm:min-h-[20em] h-[100%] py-[5rem] w-[25em] bg-white sm:rounded-[0.5em] flex flex-col py-[1em] px-[2em]`,
         form: ` flex flex-col  min-h-[20em] overflow-hidden `,
         input: `border-b border-sky-300 mb-[0.5em] py-[0.5em] outline-none`,
         title: `text-[1.5em] text-center text-sky-900 mb-[1em] font-mono font-bold`,
@@ -59,6 +61,7 @@ const SignUp = () => {
         }
 
         try {
+            setSubmitting(true)
             const { user } = await createUserWithEmailAndPassword(auth, email, password)
             const storageRef = ref(storage, displayName);
 
@@ -97,7 +100,7 @@ const SignUp = () => {
             const errorCode = error.code;
             const errorMessage = error.message;
 
-            alert(errorCode, errorMessage)
+            setErr2(errorMessage)
 
 
         };
@@ -157,7 +160,9 @@ const SignUp = () => {
                         <img src={avi} alt='add icon' className={style.avatar} />
                         <span className={style.avatardesc}>choose a profile picture</span>
                     </label>
-                    <Button signup>Sign Up</Button>
+                    <div className="text-red-500 text-[14px]">{err2}</div>
+                    
+                    <Button signup>{submitting ? 'please wait...' : 'register'}</Button>
                 </form>
                 <div>
                     Do you have an account? <span className={style.spansignin} onClick={() => navigate('/signin')}> Sign In </span> here.

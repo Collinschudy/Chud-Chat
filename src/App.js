@@ -35,7 +35,7 @@ const navigate = useNavigate()
         const ref = doc(db, 'chudChatUsers', user.uid);
         onSnapshot(ref, (snapDoc) => {
           setActiveUser({id: snapDoc.id, ...snapDoc.data()})
-          console.log(currentUser)
+         
         })
       }else{
         navigate('/signin')
